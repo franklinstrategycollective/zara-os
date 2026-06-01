@@ -1,11 +1,7 @@
 import type { NextConfig } from 'next';
 
 const config: NextConfig = {
-  reactStrictMode: true,
-  experimental: {
-    reactCompiler: true,
-    cacheComponents: true,
-  },
+  reactStrictMode: false,
   // HIPAA: never log PHI in server logs
   logging: {
     fetches: {
