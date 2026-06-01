@@ -1,46 +1,41 @@
-# Zara OS — Vocabulary Lock
+# Zara OS Domain Context Vocabulary
 
-This document is the canonical glossary for the Zara OS monorepo. All code, ADRs, docs, and PRs must use these terms exactly. When vocabulary drifts in any conversation, this file is the source of truth.
+This reference guide documents domain-specific healthcare and administrative terms utilized across the Zara OS codebase.
 
-## Domain Vocabulary
+## 1. Compliance and Regulatory Standards
 
-| Term | Definition | Anti-confusion note |
-|---|---|---|
-| **Encounter** | A single clinical interaction between patient and provider. FHIR `Encounter` resource. | Not the same as Appointment (the scheduled slot) or Visit (colloquial). |
-| **Appointment** | A scheduled time slot. May or may not result in an Encounter. | Always FHIR `Appointment`. |
-| **Patient** | An individual receiving care. FHIR `Patient` resource. | Never "user" in clinical context. Users are providers, admins, MAs. |
-| **Practitioner** | A licensed provider. FHIR `Practitioner` resource. | NPI-bearing. Includes physicians, NPs, PAs. |
-| **Observation** | A measurement or finding. FHIR `Observation` resource. | Vitals, labs, screening results. Not "data point." |
-| **DocumentReference** | A clinical document. FHIR `DocumentReference` resource. | SOAP notes, scanned PDFs, transcripts. |
-| **ServiceRequest** | An order. FHIR `ServiceRequest` resource. | Labs, imaging, referrals all use ServiceRequest. |
-| **PHI** | Protected Health Information per HIPAA. Any data identifying a patient + their health info. | Treat as toxic by default. |
-| **De-identified** | Stripped per HIPAA Safe Harbor (18 identifiers removed) or Expert Determination. | "Anonymized" is not a HIPAA term — never use. |
-| **BAA** | Business Associate Agreement. Required between any party processing PHI on our behalf. | No BAA = no PHI flows there. |
-| **MPI** | Master Patient Index. Single source of truth for patient identity across systems. | Not a "patient database." |
+### HIPAA (Health Insurance Portability and Accountability Act)
+US federal law establishing data privacy and security provisions for safeguarding medical information.
+- **PHI (Protected Health Information):** Any health information that can be linked to a specific individual.
+- **BAA (Business Associate Agreement):** A legal contract required between a healthcare provider and a third-party vendor (like Cloudflare, AWS, Supabase) handling PHI, ensuring strict security compliance.
 
-## Agent Vocabulary
+### HITRUST CSF
+A certifiable security framework that harmonizes multiple standards (HIPAA, ISO, NIST, PCI) to provide a standardized compliance baseline.
 
-| Term | Definition |
-|---|---|
-| **PAZRM** | The five agents: Post-Visit Autopilot, AI Scribe, Zara Clinical, Referral, Medical Knowledge. |
-| **Conductor** | The orchestrator that routes work between agents. |
-| **Reasoning trace** | The full chain-of-thought for an agent action. Stored immutably for audit. |
-| **Provenance** | FHIR resource attributing every clinical change to its source (human or agent). |
-| **Break-glass** | Emergency access overriding normal RBAC, with mandatory justification + alert. |
-| **Minimum necessary** | HIPAA principle: only access the minimum PHI needed for the task. |
+### ONC HTI-1 (Health Information Technology for Economic and Clinical Health)
+Certification program regulating health IT interoperability, data sharing, and algorithmic transparency.
 
-## System Vocabulary
+---
 
-| Term | Definition |
-|---|---|
-| **Edge** | Cloudflare Workers tier. Non-PHI only. |
-| **Core** | AWS EKS tier. Where PHI lives and is processed. |
-| **FHIR server** | The Medplum fork. The source of truth for clinical data. |
-| **Audit log** | Immutable record of every PHI access. CloudTrail + S3 + Datadog. |
-| **Tenant** | A practice or hospital using Zara OS. Each tenant gets isolated KMS keys. |
+## 2. Medical Data & Interoperability
 
-## Cross-references
+### FHIR (Fast Healthcare Interoperability Resources)
+An international standard for transferring electronic medical records. Zara OS uses the **FHIR R4** schema natively.
+- **Resource Examples:**
+  - `Patient`: Demographics, contact info.
+  - `Encounter`: A patient-provider interaction.
+  - `Observation`: Vital signs, lab values.
+  - `DocumentReference`: Transcripts and clinical notes.
 
-- ADR-001 to ADR-008: see `docs/ADRs/`
-- HIPAA controls: see `compliance/hipaa/security-rule-controls.md`
-- Data flows: see `data-flows.yaml`
+### HL7 v2 / v3
+Legacy healthcare messaging standards. Transformed to FHIR inside our API gateway.
+
+---
+
+## 3. Medical Coding & Billing
+
+### ICD-10 (International Classification of Diseases, 10th Revision)
+Standardized diagnostic codes representing diseases, signs, symptoms, and external causes of injury.
+
+### CPT (Current Procedural Terminology)
+Standardized five-digit billing codes used by insurance companies to identify medical, surgical, and diagnostic procedures performed by healthcare providers.

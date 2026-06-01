@@ -1,46 +1,21 @@
-# Security Policy — Zara OS
+# Security & HIPAA Compliance Posture
 
-## Reporting a Vulnerability
+Zara OS is designed from the ground up to respect patient confidentiality and adhere strictly to the **HIPAA Security Rule** and **SOC 2 Type II** security criteria.
 
-If you discover a security vulnerability in Zara OS, please report it responsibly.
+## Core Pillars of Security
 
-**DO NOT** open a public GitHub issue.
+### 1. Zero PHI on Edge Runtimes
+Cloudflare Workers and Durable Objects process patient streams in real-time but do not persist or cache any raw Protected Health Information (PHI) in edge-side storage.
 
-**DO** email: security@rjbusinesssolutions.org
+### 2. Mandatory End-to-End Encryption
+- **In Transit:** All APIs require HTTPS/TLS 1.3 with secure cipher suites. Communication with backends utilizes Mutually Authenticated TLS (mTLS).
+- **At Rest:** Database instances on Supabase and Medplum utilize AES-256 transparent data encryption.
 
-You should receive a response within 24 hours. We will keep you informed throughout remediation.
+### 3. Cryptographically Chained Audit Logging
+Every action, data modification, or tool request results in an entry in an append-only database. Each log contains:
+- Cryptographic hash chaining (SHA-256 of the current log combined with the prior entry's hash).
+- Verified UTC timestamp.
+- IP Address and identity signature of the requester.
 
-## Supported Versions
-
-| Version | Supported |
-|---|---|
-| main | ✅ |
-| pre-release | ❌ |
-
-## HIPAA-Specific Disclosures
-
-If your vulnerability report involves potential PHI exposure:
-1. Do not share PHI with us via email
-2. Provide reproduction steps without including PHI
-3. Note "PHI exposure suspected" in subject line for priority routing
-
-## Bug Bounty
-
-Pre-launch: invitation-only program. Contact security@rjbusinesssolutions.org for details.
-
-## Encryption
-
-All Zara OS PHI is encrypted at rest (AES-256 via AWS KMS) and in transit (TLS 1.3 minimum). Customer-managed encryption keys available on Enterprise tier.
-
-## Auditing
-
-All PHI access is logged immutably and retained for 7 years minimum per HIPAA.
-
-## Compliance Targets
-
-- HIPAA Security Rule
-- HIPAA Privacy Rule
-- HIPAA Breach Notification Rule
-- SOC 2 Type II
-- HITRUST CSF
-- ONC HTI-1 Certification
+## Vulnerability Disclosure
+If you find a security vulnerability, please do not file a public issue. Email security@zaramedical.com directly to initiate our private disclosure and patch protocol.

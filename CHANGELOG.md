@@ -2,29 +2,12 @@
 
 All notable changes to Zara OS will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
-## [Unreleased]
-
+## [0.1.0] - 2026-05-31
 ### Added
-- Initial monorepo scaffold
-- Five-layer architecture documentation
-- Eight foundational ADRs
-- HIPAA + SOC 2 + HTI-1 compliance scaffolding
-- PAZRM agent design specifications
-- FHIR R4 data model scope
-- 90-day build plan
-
-### Security
-- Field-level encryption strategy defined (ADR-005)
-- Audit log schema designed
-- BAA registry initialized
-
-## [0.0.1] - 2026-05-31
-
-- Project initialized
-- Repository created (private)
-- Build engine: Supreme Meta AGI v10.0
-- Founder: Dr. Jessica Edwards, DO MBA
-- Brand: RJ Business Solutions
+- Complete monorepo scaffold using pnpm workspaces.
+- Cloudflare Workers reception application `apps/reception` built on Hono.
+- Specialized typescript agents: `IntakeAgent`, `TriageAgent`, `SchedulingAgent`, and `EscalationAgent`.
+- Core patient EHR and scheduling tools for integration testing.
+- Unified HIPAA cryptographic audit logging library under `packages/compliance`.
+- Core architecture decision records (ADRs 001 through 004).
+- Automated HIPAA CI gate control verification script (`scripts/hipaa-control-check.mjs`).
