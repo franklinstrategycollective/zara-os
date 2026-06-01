@@ -1,0 +1,13 @@
+name = "zara-os-reception"
+main = "src/index.ts"
+compatibility_date = "2026-05-31"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+NODE_ENV = "production"
+
+# Cloudflare D1 for HIPAA Logging
+[[d1_databases]]
+binding = "DB"
+database_name = "zara-os-db"
+database_id = "00000000-0000-0000-0000-000000000000"
