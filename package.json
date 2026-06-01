@@ -25,6 +25,8 @@
     "audit:hipaa": "node scripts/hipaa-control-check.mjs",
     "watchdog": "node scripts/hallucination-watchdog.mjs"
   },
+  "dependencies": {
+  },
   "devDependencies": {
     "turbo": "2.3.3",
     "typescript": "5.8.3",
