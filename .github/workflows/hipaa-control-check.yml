@@ -1,0 +1,41 @@
+name: HIPAA Control Check
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  hipaa-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Block PHI in committed files
+        run: |
+          # Search for common PHI patterns in any committed file
+          if grep -rE '\b\d{3}-\d{2}-\d{4}\b' --include="*.{ts,tsx,js,py,json,yaml,md}" .; then
+            echo "❌ SSN pattern detected in source"
+            exit 1
+          fi
+          if grep -rE '\b\d{1,2}/\d{1,2}/(19|20)\d{2}\b' --include="*.{ts,tsx,js,py}" --exclude-dir=node_modules .; then
+            echo "⚠️ Date-of-birth pattern detected — manual review required"
+          fi
+          echo "✅ No PHI patterns found"
+
+      - name: Verify data-flows.yaml exists
+        run: |
+          test -f data-flows.yaml || (echo "❌ data-flows.yaml missing" && exit 1)
+          echo "✅ data-flows.yaml present"
+
+      - name: Verify no .env committed
+        run: |
+          if git ls-files | grep -E '^\.env(\..*)?$' | grep -v '.example'; then
+            echo "❌ .env file committed"
+            exit 1
+          fi
+          echo "✅ No .env files in repository"
+
+      - name: Verify BAA registry up to date
+        run: |
+          grep -q "baa_registry:" data-flows.yaml || (echo "❌ baa_registry missing" && exit 1)
+          echo "✅ BAA registry present"

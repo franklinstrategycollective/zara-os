@@ -1,0 +1,74 @@
+version: '3.9'
+
+# ═══════════════════════════════════════════════════════════════════════
+# ZARA OS — Local Development Compose
+# Spins up: Postgres, Redis, Medplum FHIR server, local FastAPI core
+# NEVER use this compose in production. Production = AWS EKS + Supabase.
+# ═══════════════════════════════════════════════════════════════════════
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: zara-os-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: zara_os_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: zara-os-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  medplum:
+    image: medplum/medplum-server:latest
+    container_name: zara-os-medplum
+    environment:
+      MEDPLUM_DATABASE_HOST: postgres
+      MEDPLUM_DATABASE_PORT: 5432
+      MEDPLUM_DATABASE_DBNAME: medplum
+      MEDPLUM_DATABASE_USERNAME: postgres
+      MEDPLUM_DATABASE_PASSWORD: postgres
+      MEDPLUM_REDIS_HOST: redis
+    ports:
+      - "8103:8103"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+  api-core:
+    build:
+      context: ./apps/api-core
+      dockerfile: Dockerfile
+    container_name: zara-os-api-core
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/zara_os_dev
+      REDIS_URL: redis://redis:6379
+      FHIR_BASE_URL: http://medplum:8103/fhir/R4
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+      - medplum
+    volumes:
+      - ./apps/api-core:/app
+
+volumes:
+  postgres_data:
+  redis_data:

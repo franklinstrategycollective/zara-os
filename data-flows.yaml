@@ -1,0 +1,95 @@
+# ═══════════════════════════════════════════════════════════════════════
+# ZARA OS — Data Flow Inventory
+# Per HIPAA Privacy Rule + GDPR Article 30
+# Every PHI flow MUST be documented here before code touches it.
+# ═══════════════════════════════════════════════════════════════════════
+
+flows:
+  - id: patient_intake_form
+    data: [name, dob, address, phone, email, insurance, medical_history]
+    purpose: Patient registration and clinical care
+    legal_basis: HIPAA Treatment, Payment, Healthcare Operations (TPO)
+    retention_days: 2555  # 7 years post last encounter
+    shared_with: [fhir_server, audit_log]
+    stored_in: aws_rds_phi
+    encrypted_at_rest: true
+    encryption_method: AES-256-GCM via AWS KMS
+    deletion_endpoint: /api/v1/patients/:id/delete
+    deletion_method: soft_delete + 30_day_purge
+
+  - id: encounter_audio_recording
+    data: [voice_recording, transcript, clinical_content]
+    purpose: AI Scribe ambient documentation
+    legal_basis: TPO + explicit patient consent
+    retention_days: 30  # raw audio; transcript retained per encounter rules
+    shared_with: [aws_transcribe_medical, bedrock_claude]
+    stored_in: aws_s3_phi_bucket
+    encrypted_at_rest: true
+    encryption_method: SSE-KMS with customer-managed key
+    deletion_endpoint: /api/v1/encounters/:id/audio/delete
+    consent_required: true
+    consent_resource: fhir_consent_record
+
+  - id: agent_reasoning_trace
+    data: [agent_id, prompt, response, tools_called, patient_context_summary]
+    purpose: HIPAA audit + future FDA AI/ML transparency
+    legal_basis: HIPAA Security Rule audit controls
+    retention_days: 2555
+    shared_with: [audit_log, datadog_siem]
+    stored_in: aws_s3_audit_bucket
+    encrypted_at_rest: true
+    immutable: true  # WORM storage policy on S3
+    deletion_endpoint: none  # Never deleted
+
+  - id: referral_packet
+    data: [patient_demographics, relevant_notes, labs, imaging, insurance]
+    purpose: Specialty referral routing
+    legal_basis: TPO
+    retention_days: 2555
+    shared_with: [recipient_specialist_via_direct_trust, fax_gateway]
+    stored_in: aws_s3_phi_bucket
+    encrypted_at_rest: true
+    encrypted_in_transit: true
+    transmission_method: [direct_trust, sfax_hipaa, encrypted_email]
+
+  - id: billing_claim
+    data: [patient_id, diagnoses, procedures, charges, payer_id]
+    purpose: Claims submission
+    legal_basis: TPO (Payment)
+    retention_days: 2555
+    shared_with: [clearinghouse, payers]
+    stored_in: aws_rds_phi
+    encrypted_at_rest: true
+    encrypted_in_transit: true
+
+baa_registry:
+  required:
+    - vendor: AWS
+      services: [EKS, RDS, S3, KMS, Bedrock, Transcribe Medical, CloudTrail]
+      status: pending
+    - vendor: Supabase
+      services: [Postgres HIPAA tier]
+      status: pending
+    - vendor: Cloudflare
+      services: [Enterprise plan only for any PHI routing]
+      status: pending  # Edge tier never routes PHI in default config
+    - vendor: Anthropic
+      services: [Claude via AWS Bedrock]
+      status: covered_under_aws_baa
+    - vendor: Stripe
+      services: [Payment processing]
+      status: baa_not_required  # Payment data is not PHI
+    - vendor: Twilio
+      services: [Voice + SMS for patient communication]
+      status: pending
+    - vendor: Datadog
+      services: [HIPAA-tier monitoring]
+      status: pending
+    - vendor: Sentry
+      services: [Error tracking with PHI scrubbing]
+      status: pending
+
+  prohibited_until_baa:
+    - All cloud LLM providers without explicit healthcare BAA
+    - Any analytics tool processing raw PHI
+    - Any backup service without encryption + BAA

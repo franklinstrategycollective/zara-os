@@ -1,0 +1,94 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Env files (NEVER commit)
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Build outputs
+.next/
+.turbo/
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Testing
+coverage/
+playwright-report/
+test-results/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Secrets / Certs (extra paranoid for healthcare)
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+*.pfx
+secrets/
+.secrets/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Wrangler
+.wrangler/
+.dev.vars
+
+# Databases (local only)
+*.db
+*.sqlite
+
+# Compliance evidence (sensitive — manual upload only)
+compliance/soc2/evidence/*
+compliance/hipaa/evidence/*
+!compliance/soc2/evidence/.gitkeep
+!compliance/hipaa/evidence/.gitkeep
+
+# Local extraction artifacts and reference files
+temp_extract/
+run_scaffold_extraction.py
+detect_all_files.py
+detect_all_files_v2.py
+extract_all.py
+map_ranges.py
+1.md
+"Yes — and the winning move is not to bui"
+Yes\ \342\200\224\ and\ the\ winning\ move\ is\ not\ to\ bui
+Yes — and the winning move is not to bui
+*ZARA OS*.md
+*Hospital Management System Tech Stack*
+*EWOR IDEATION FELLOWSHIP*.md
+*THE THREE EWOR ATTACHMENTS*.md
+*FREE FRONTIER MODELS*
+

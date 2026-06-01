@@ -1,0 +1,25 @@
+fleet:
+  version: 1
+  owner: rick-jefferson
+  brand_kit: rj-base
+  sites:
+    - name: zara-os
+      template: saas
+      niche: healthcare-ehr
+      domain: TBD  # decision pending: zaraos.com / zaraos.health / zaramedical-os.com
+      monetization: stripe-subscription
+      tier: enterprise
+      deploy_target: aws-eks-hipaa
+      edge_target: cloudflare-pages
+      status: scaffold-complete
+      risk_tier: red  # PHI handling — always Red until BAA chain verified
+      compliance_targets:
+        - hipaa-security-rule
+        - hipaa-privacy-rule
+        - hipaa-breach-notification
+        - soc2-type-2
+        - hitrust-csf
+        - onc-hti1
+      founder: dr-jessica-edwards
+      build_engine: supreme-meta-agi-v10.0
+      activated: 2026-05-31

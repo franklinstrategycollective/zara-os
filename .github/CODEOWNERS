@@ -1,0 +1,14 @@
+# Default owners
+*                               @rjbizsolution23-wq
+
+# Compliance — requires founder + RJ approval
+/compliance/                    @rjbizsolution23-wq @jessica-edwards
+/data-flows.yaml                @rjbizsolution23-wq @jessica-edwards
+/docs/ADRs/                     @rjbizsolution23-wq @jessica-edwards
+
+# Agents — clinical safety review required
+/apps/agents/                   @rjbizsolution23-wq @jessica-edwards
+
+# Infrastructure — Rick approval required
+/infra/                         @rjbizsolution23-wq
+/.github/workflows/             @rjbizsolution23-wq

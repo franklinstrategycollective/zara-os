@@ -1,0 +1,28 @@
+name: Hallucination Watchdog
+
+on:
+  pull_request:
+    paths:
+      - 'pnpm-lock.yaml'
+      - '**/package.json'
+      - '**/requirements.txt'
+      - '**/pyproject.toml'
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Pre-install package verification
+        run: |
+          echo "🐕 Hallucination watchdog scanning dependencies"
+          # Check every npm dep age, downloads, maintainer rep
+          # Block if package <90 days old, <1000 weekly downloads, or typosquat candidate
+          node scripts/hallucination-watchdog.mjs || exit 1
+          echo "✅ All dependencies passed watchdog"
