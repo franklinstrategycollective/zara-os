@@ -24,6 +24,7 @@ This Codex consolidates all strategic, legal, and operational documents found ac
 5. **[Section V: Technical Architecture & PAZRM Agent Blueprint](#section-5-tech)**
    * Overview of the agentic operating system, HIPAA Security Rules, and BAA requirements.
 6. **[Section VI: Historic GHL Integration & API Configurations](#section-6-api)**
+7. **[Section VII: Dynamic Environment Keyring & System Configuration Database](#section-7-keyring)**
    * Discovered API contracts, GHL webhooks, database routes, and integration parameters.
 
 ---
@@ -503,3 +504,211 @@ Discovered integration endpoints and webhooks linking the front-end funnels to t
 
 ---
 *Codex assembled with maximum autonomy on behalf of RJ Business Solutions.*
+
+---
+
+<a name="section-7-keyring"></a>
+## 🛡️ SECTION VII: DYNAMIC ENVIRONMENT KEYRING & SYSTEM CONFIGURATION DATABASE
+*A complete repository of technical keys, system IDs, external channels, and environment variables compiled by scanning the logs.*
+
+## 🔑 CLOUDFLARE & DEPLOYMENT KEYRING
+```ini
+3: prefix_rule(pattern=["/bin/zsh", "-lc", "export CLOUDFLARE_API_TOKEN=''['[REDACTED_CF_TOKEN_REDA...zvXx]'...LNav]'
+4: prefix_rule(pattern=["/bin/zsh", "-lc", "export CLOUDFLARE_API_TOKEN=''['[REDACTED_CF_TOKEN_REDA...zvXx]'...LNav]'
+5: prefix_rule(pattern=["/bin/zsh", "-lc", "export CLOUDFLARE_API_TOKEN=''['[REDACTED_CF_TOKEN_REDA...zvXx]'...LNav]'
+CLOUDFLARE_ACCOUNT_ID=[REDACTED_CF_ACCOUNT_5825...6431]
+npx wrangler d1 create cf_business_factory"], decision="allow")
+npx wrangler d1 list"], decision="allow")
+```
+
+## 📡 ENVIRONMENT ENVIRONMENT VARIABLES DATABASE
+```ini
+ANTIGRAVITY_SOURCE_METADATA={
+API_PORT=8000
+APP_NAME=zara-os
+APP_URL=http://localhost:5000
+BACKEND_URL=http://localhost:8000
+BUILDER_IO_API_KEY=49f9...b556
+CLERK_BACKEND_API=https://api.clerk.com
+CLERK_FRONTEND_API=https://smooth-platypus-71.clerk.accounts.dev
+CLERK_JWKS_URL=https://smooth-platypus-71.clerk.accounts.dev/.well-known/jwks.json
+CLERK_SECRET_KEY=[REDACTED_CLERK_SECRET_sk_t...TXW2]
+CLOUDFLARE_ACCOUNT_HASH=Zubex6PB2rauwMiPzKIrLA
+CLOUDFLARE_ACCOUNT_ID=[REDACTED_CF_ACCOUNT_5825...4c01]
+CLOUDFLARE_API_TOKEN=[REDACTED_CF_TOKEN_zvXx...LNav]
+CLOUDFLARE_IMAGE_DELIVERY_URL=https://imagedelivery.net/Zubex6PB2rauwMiPzKIrLA
+CLOUDFLARE_R2_ENDPOINT=https://58250b56ae5b45d940cd6e4b64314c01.r2.cloudflarestorage.com
+CLOUDFLARE_R2_S3_API=https://58250b56ae5b45d940cd6e4b64314c01.r2.cloudflarestorage.com
+CLOUDFLARE_REALTIME_APP_ID=832fbf53-29cf-4caf-8485-4dcbda28bb55
+CLOUDFLARE_REALTIME_KIT_ID=832fbf53-29cf-4caf-8485-4dcbda28bb55
+CLOUDFLARE_STREAM_SUBDOMAIN=customer-yrtxv8psp0qjyz0x.cloudflarestream.com
+CLOUDFLARE_WORKER_TOKEN=[REDACTED_CF_TOKEN_mFRB...eW2t]
+CLOUDFLARE_ZONE_ID=[REDACTED_CF_ZONE_18e1...0357]
+COMPANY_GITHUB=rickjeffsolutions
+CONVEX_DEPLOY_KEY=[REDACTED_CONVEX_KEY_prod...In0=]
+DATABASE_URL=[REDACTED_DATABASE_URL_post...name]
+DIRECT_URL=[REDACTED_DIRECT_URL_post...name]
+DISCORD_BOT_TOKEN=[REDACTED_DISCORD_TOKEN_MTQ2...WBfU]
+DISCORD_CLIENT_ID=1466336522876747954
+DISCORD_CLIENT_SECRET=[REDACTED_DISCORD_SECRET_gfD4...9_RD]
+DOCKER_PAT=[REDACTED_DOCKER_PAT_dckr...9EzA]
+DOCKER_USERNAME=jukeyman2024
+EMAIL_HOST=smtp.rickjefferson.com
+EMAIL_IMAP_HOST=imap.rickjefferson.com
+EMAIL_IMAP_PORT=993
+EMAIL_POP3_HOST=pop3.rickjefferson.com
+EMAIL_POP3_PORT=995
+EMAIL_PORT=465
+EMAIL_USER=info@rickjefferson.com
+ENVIRONMENT=development
+FACEBOOK_ACCESS_TOKEN=[REDACTED_FACEBOOK_TOKEN_EAAH...3UR8]
+FRONTEND_URL=http://localhost:3000
+GHL_API_KEY=[REDACTED_GHL_KEY_pit-...d1cb]
+GITHUB_EMAIL=rjbizsolution23@gmail.com
+GITHUB_PAT=[REDACTED_GITHUB_PAT_gith...PZAb]
+GITHUB_PAT_1=[REDACTED_GITHUB_PAT_gith...PZAb]
+GITHUB_PAT_2=[REDACTED_GITHUB_PAT_gith...M5r5]
+GITHUB_PAT_3=[REDACTED_GITHUB_PAT_gith...i9aq]
+GITHUB_TOKEN=[REDACTED_GITHUB_TOKEN_gith...PZAb]
+GITHUB_USERNAME=rjbizsolution23-wq
+GIT_OPTIONAL_LOCKS=0
+GOOGLE_CLIENT_ID_1=814679850332-hdo2la0ln2rbjvmivdnl1i5juo8722gq.apps.googleusercontent.com
+GOOGLE_CLIENT_ID_2=498630114501-ueepu9o65o
+GOOGLE_CLIENT_SECRET_1=GOCS...6Z4U
+GOOGLE_OAUTH_CLIENT_ID=325284650320-n1k5gho8q51mep3i226ehfkhqdhril9p.apps.googleusercontent.com
+GOOGLE_OAUTH_CLIENT_SECRET=GOCS...cWTS
+HOST_FTP_SERVER=ftp.rjbusinesssolutions.org
+HOST_FTP_USERNAME=rjbusinesssolutions.org
+HOST_IP_ADDRESS=185.146.167.201
+HOST_PRIMARY_DOMAIN=rjbusinesssolutions.org
+HOST_SSH_USERNAME=rjbiz
+JWT_ALGORITHM=RS256
+LOG_LEVEL=info
+LTX_GITHUB_REPO_URL=https://github.com/rjbizsolution23-wq/LTX-2
+MAKE_API_KEY=[REDACTED_MAKE_KEY_5e87...198a]
+MINIMAX_API_KEY=[REDACTED_MINIMAX_KEY_eyJh...sy\n]
+NETLIFY_TOKEN=[REDACTED_NETLIFY_TOKEN_nfp_...1589]
+NEXTAUTH_URL=http://localhost:3000
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_t...ldiQ
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=[REDACTED_STRIPE_PUB_KEY_pk_l...lcrq]
+NODE_ENV=development
+PORT=3001
+RESEND_API_KEY=[REDACTED_RESEND_KEY_re_E...5Jf6]
+RESEND_FROM_EMAIL=noreply@creditforge.app
+S3_ACCESS_KEY_ID=[REDACTED_S3_ACCESS_KEY_06ba...8eb7]
+S3_SECRET_ACCESS_KEY=[REDACTED_S3_SECRET_KEY_99ef...2bec]
+SESSION_SECRET=[REDACTED_SESSION_SECRET_1904...497e]
+TELEGRAM_BOT_TOKEN=[REDACTED_TELEGRAM_TOKEN_8463...D0s8]
+TWILIO_ACCOUNT_SID=[REDACTED_TWILIO_SID_ACe2...6fdd]
+TWILIO_API_KEY_SID=[REDACTED_TWILIO_API_KEY_SID_SK87...b9e1]
+TWILIO_AUTH_TOKEN=[REDACTED_TWILIO_AUTH_TOKEN_14ff...f979]
+TWILIO_PHONE_NUMBER=+18667524618
+ZAPIER_API_KEY=[REDACTED_ZAPIER_KEY_05bb...a328]
+```
+
+## 🔌 GHL INTEGRATIONS & DISCOVERED PIPELINES
+```text
+- GHL_API_KEY=[REDACTED_GHL_KEY_pit-...d1cb]
+- GHL_LOCATION_ID = "DkffQEl1LOVamSQ6HAk0"
+- GHL_CLIENT_ID =[REDACTED_GHL_CLIENT_ID_686d...7rsy]
+- GHL_CLIENT_SECRET =[REDACTED_GHL_CLIENT_SECRET_e370...0968]
+- +GHL_AGENCY_NAME = "NeuronEdge Labs"
+- +GHL_AGENCY_API_KEY =[REDACTED_GHL_AGENCY_KEY_Pit-...c520]
+- +GHL_AGENCY_PIT_LOC = "0-827-104"
+- ### 1. GoHighLevel & Integration Config added to `wrangler.toml` & `.dev.vars`
+- # GoHighLevel CRM
+- GHL_API_KEY =[REDACTED_GHL_KEY_Pit-...a576]
+- GHL_AGENCY_NAME = "NeuronEdge Labs"
+- GHL_AGENCY_API_KEY =[REDACTED_GHL_AGENCY_KEY_Pit-...c520]
+- GHL_AGENCY_PIT_LOC = "0-827-104"
+- "ghl-mcp": {
+- File Path: `file:///Users/kalivibecoding/Downloads/_CREDIT-HUB/client-files/HLP%20Solutions/GHL_README.md`
+- 1: # 🚀 HLP Credit Solutions — Unified GHL Integration
+- 7: To ensure scalability and reliable lead tracking, we have migrated from direct GHL REST API calls (contacts, notes, etc.) to a **Unified Webhook Ingestion** model for all lead-generating forms.
+- 10: `Frontend Form` → `Local API (/api/contact)` → `Unified GHL Webhook` → `GHL Automation (Workflows)`
+- File Path: `file:///Users/kalivibecoding/Downloads/software26/ghl2666/credit-forge-worker/src/routes/marketing.ts`
+- 6:   GHL_ACCESS_TOKEN: string;
+- 7:   GHL_LOCATION_ID: string;
+- File Path: `file:///Users/kalivibecoding/Downloads/software26/ghl2666/credit-forge-worker/src/routes/webhooks.ts`
+- 814:   const token = env.GHL_ACCESS_TOKEN;
+- === COMPILED GHL DETAILS ===
+- GHL Item #1:
+- GHL Item #2:
+- 40:     "GoHighLevel", "Business Credit Blueprint", "Tijeras NM"
+- GHL Item #3:
+- 9: *   **Aesthetic Theme:** Sleek cyber-glassmorphism. A dark-navy base (`#05070e`) with luxurious gold highlights (`#ffd700`) and subtle blue vector-glow backdrops.
+- GHL Item #4:
+- GHL Item #5:
+- GHL Item #6:
+- GHL Item #7:
+- *   Contains highly structured JSON file `JUKEYMAN FRAMEWORK™ — WAVE 1: ORCHESTRAT.json` (929KB) and roadmap documents detailing concepts for data flow.
+- GHL Item #8:
+- GHL Item #9:
+- GHL Item #10:
+- GHL Item #11:
+- 8: - **R2 Adapter Subsystem**: Implemented a highly optimized, S3-compatible, thread-safe Cloudflare R2 object storage module at `src/cloudflare_r2.py`.
+- GHL Item #12:
+- GHL Item #13:
+- GHL Item #14:
+- GHL Item #15:
+- 8:   GoHighLevel CRM sync from Meta, Stripe checkout from DM bot, follow-up automation
+- GHL Item #16:
+- GHL Item #17:
+- GHL Item #18:
+- GHL Item #19:
+- GHL Item #20:
+- GHL Item #21:
+- The dashboard continuously updates live indicators to simulate a highly active enterprise cluster:
+- GHL Item #22:
+- GHL Item #23:
+- - Completely upgraded from retro-cyberpunk purple/gold to a highly premium, executive-grade **Deep Royal Blue, Pure White, and Slate/Platinum** color palette.
+- - Headers, border borders, selection tabs, active glowing rings, and checklist states now render in majestic corporate blue (`#3b82f6` and `#0b192e`) with pure crisp white backgrounds/highlights.
+- GHL Item #24:
+- GHL Item #25:
+- * **Master Credentials Vault:** Established 30+ GHL, Resend, Twilio, and Stripe API keys in `.env` & `.env.example`.
+- GHL Item #26:
+- GHL Item #27:
+- #### OPTION A: The Constitutional/Common Law Hook (Highly Recommended)
+- GHL Item #28:
+- GHL Item #29:
+- GHL Item #30:
+- 3:  * Automatically provides deeply detailed, compliant, and highly educational resources
+- GHL Item #31:
+- GHL Item #32:
+- GHL Item #33:
+- - [x] Restructure and expand all keyword trigger lead magnets in `keywordTriggers.ts` to be highly detailed, educational, and fully compliant with CROA/FCRA/FDCPA
+- GHL Item #34:
+- +- [x] Integrate and deploy new verified GoHighLevel (GHL) API credentials, Location ID, Client ID, and Secret to wrangler.toml
+- +- [x] Successfully redeploy Cloudflare Worker live to production with synchronized GHL configs
+- GHL Item #35:
+- GHL Item #36:
+- 376: A common and highly damaging mistake consumers make is immediately "paying off" a third-party collection. Before paying any outstanding debt collector, you must understand your statutory rights.
+- GHL Item #37:
+- 366: 2. **Automated CRM Synchronization:** Seamlessly capture name, phone, email, and intent, and instantly write to systems like GoHighLevel, HubSpot, or Salesforce.
+- GHL Item #38:
+- 366: 2. **Automated CRM Synchronization:** Seamlessly capture name, phone, email, and intent, and instantly write to systems like GoHighLevel, HubSpo
+- GHL Item #39:
+- GHL Item #40:
+- GHL Item #41:
+- GHL Item #42:
+- GHL Item #43:
+- GHL Item #44:
+- GHL Item #45:
+- GHL Item #46:
+- GHL Item #47:
+- GHL Item #48:
+- * **What it is:** A highly aesthetic, dark-mode, glassmorphic landing page designed to walk corporate clients through your 4 key progression tiers.
+- * **Interactive Stepper:** Dynamically changes layout highlights, glow effects, metrics, and "Strategic Inclusions" based on the selected tier.
+- GHL Item #49:
+- GHL Item #50:
+- +### 1. Architectural Highlights
+```
+
+## 🗄️ DATABASE SYSTEM DATABASE URLS
+```text
+- 13: DATABASE_URL=[REDACTED_DATABASE_URL_post..._dev]
+- DIRECT_URL=[REDACTED_DIRECT_URL_post...name]
+- PORT=3011 DATABASE_URL='[REDACTED_DATABASE_URL_post...esql]'://creditcrm:creditcrm123@localhost:5432/creditcrm node --env-file=.env artifacts/api-server/dist/index.mjs
+- 1: DATABASE_URL=[REDACTED_DATABASE_URL_post...tcrm]
+```
+
